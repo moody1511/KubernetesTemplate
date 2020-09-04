@@ -1,0 +1,11 @@
+apiversion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: myclaim
+spec:
+ accessModes:
+  - ReadWriteOnce
+ storageClassName: google-storage #If we have dynamic provisioning
+ resources:
+  requests:
+   storage: 500 Mi

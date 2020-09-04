@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+  tolerations:
+  - key: "app"
+    operator: "Equal"
+    value: "Blue"
+    effect: "NoSchedule"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+            - key: size
+              operator: In/NotIn/Exists
+              values:
+                - Large
+                - Small
+  nodeName: node01
+

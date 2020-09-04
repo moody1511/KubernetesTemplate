@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: developer
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "watch", "list","delete","create"]
+- apiGroups: [""]
+  resources: ["ConfigMap"]
+  verbs: ["create"]
+  ## resourcenames: ["blue","orange"] = we can give permissions only to specific resource-groups:SearchResources

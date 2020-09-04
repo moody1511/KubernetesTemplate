@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    command : ["/bin/sh","-c"]
+    args: ["shuf -i 0-100 -n 1>> /opt/number.out;"]
+    volumeMounts:
+    - mountPath:
+      name: data-volume
+    - mountPath:
+      name: data-volume-ebs
+      
+volumes:
+- name: data-volume
+  hostPath:
+   path: /data
+   type: directory
+- name: data-volume-ebs
+  awsElasticBlockStore:
+   volumeID: |volumeid|
+   fsType: ext4
